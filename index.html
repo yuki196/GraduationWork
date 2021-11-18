@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>天神乗り換えマップ</title>
+	<meta name = "viewport" content = "width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VB3FMPYEQT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VB3FMPYEQT');
+</script>
+	<script src="js/three.min.js"></script>
+	<script src = "js/controls/OrbitControls.js"></script>
+	<script src = "js/loaders/OBJLoader.js"></script>
+	<script src = "js/loaders/MTLLoader.js"></script>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="box"></div>
+	<div class = "selectbox-departure">
+		<select id = "departure">
+			<option value = "init">出発地</option>
+			<option value = "FukuokaStation_N">西鉄福岡(天神)駅　北口</option>
+			<option value = "FukuokaStation_M">西鉄福岡(天神)駅　三越口</option>
+			<option value = "FukuokaStation_S">西鉄福岡(天神)駅　南口</option>
+			<option value = "TenjinStation">天神駅（地下鉄空港線）</option>
+			<option value = "TenjinSouthStation">天神南駅（地下鉄七隈線）</option>
+			<option value = "bus_BT">西鉄天神高速バスターミナル</option>
+			<option value = "bus_1AB">1A/1B 天神高速バスターミナル前</option>
+			<option value = "bus_1C">1C 天神高速バスターミナル前</option>
+			<option value = "bus_2AB">2A/2B 天神ソラリアステージ前</option>
+			<option value = "bus_3">3 天神北</option>
+			<option value = "bus_4ABC">4A/4B/4C 天神大丸前</option>
+			<option value = "bus_7ABC">7A/7B/7C 天神ソラリアステージ前</option>
+			<option value = "bus_9ABC">9A/9B/9C 天神北</option>
+			<option value = "bus_10">10 天神協和ビル前</option>
+			<option value = "bus_11">11 天神新天町入口</option>
+			<option value = "bus_12">12 天神大和証券前</option>
+			<option value = "bus_13A">13A 天神福銀本店前</option>
+			<option value = "bus_14">14 天神大和証券前</option>
+			<option value = "bus_15">15 天神三丁目</option>
+			<option value = "bus_16">16 天神中央郵便局前</option>
+			<option value = "bus_17">17 天神三丁目</option>
+			<option value = "bus_18ABC">18A/18B/18C 天神中央郵便局前</option>
+			<option value = "bus_19AB">19A/19B 天神日銀前</option>
+			<option value = "bus_kego_E">天神警固神社・三越前（博多駅方面）</option>
+			<option value = "bus_kego_W">天神警固神社・三越前（六本松方面）</option>
+			<option value = "bus_T1_E">天神一丁目（博多駅方面）</option>
+			<option value = "bus_T1_W">天神一丁目（六本松方面）</option>
+			<option value = "bus_TS_N">天神南（博多港・福岡タワー方面）</option>
+			<option value = "bus_TS_S">天神南（博多駅・那珂川方面）</option>
+		</select>
+	</div>
+	
+	<div class = "selectbox-destination">
+		<select id = "destination">
+			<option value = "init">目的地</option>
+			<option value = "FukuokaStation">西鉄福岡(天神)駅</option>
+			<option value = "TenjinStation">天神駅（地下鉄空港線）</option>
+			<option value = "TenjinSouthStation">天神南駅（地下鉄七隈線）</option>
+			<option value = "bus_BT">西鉄天神高速バスターミナル</option>
+			<option value = "bus_1AB">1A/1B 天神高速バスターミナル前</option>
+			<option value = "bus_1C">1C 天神高速バスターミナル前</option>
+			<option value = "bus_2AB">2A/2B 天神ソラリアステージ前</option>
+			<option value = "bus_3">3 天神北</option>
+			<option value = "bus_4ABC">4A/4B/4C 天神大丸前</option>
+			<option value = "bus_7ABC">7A/7B/7C 天神ソラリアステージ前</option>
+			<option value = "bus_9ABC">9A/9B/9C 天神北</option>
+			<option value = "bus_10">10 天神協和ビル前</option>
+			<option value = "bus_11">11 天神新天町入口</option>
+			<option value = "bus_12">12 天神大和証券前</option>
+			<option value = "bus_13A">13A 天神福銀本店前</option>
+			<option value = "bus_14">14 天神大和証券前</option>
+			<option value = "bus_15">15 天神三丁目</option>
+			<option value = "bus_16">16 天神中央郵便局前</option>
+			<option value = "bus_17">17 天神三丁目</option>
+			<option value = "bus_18ABC">18A/18B/18C 天神中央郵便局前</option>
+			<option value = "bus_19AB">19A/19B 天神日銀前</option>
+			<option value = "bus_kego_E">天神警固神社・三越前（博多駅方面）</option>
+			<option value = "bus_kego_W">天神警固神社・三越前（六本松方面）</option>
+			<option value = "bus_T1_E">天神一丁目（博多駅方面）</option>
+			<option value = "bus_T1_W">天神一丁目（六本松方面）</option>
+			<option value = "bus_TS_N">天神南（博多港・福岡タワー方面）</option>
+			<option value = "bus_TS_S">天神南（博多駅・那珂川方面）</option>
+		</select>
+	</div>
+	
+	<div><button id="thirdButton" type="button">３階</button></div>
+	<div><button id="secondButton" type="button">２階</button></div>
+	<div><button id="firstButton" type="button">１階</button>
+	<button id="groundButton" type="button">屋外</button></div>
+	<div><button id="undergroundButton" type="button">地下街</button></div>
+	
+	<div><canvas id = "mapCanvas"></canvas></div>
+	<script src = "js/map.js"></script>
+</body>
+</html>
